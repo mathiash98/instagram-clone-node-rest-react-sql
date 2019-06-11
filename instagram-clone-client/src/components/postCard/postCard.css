@@ -1,0 +1,66 @@
+.postCard {
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1vh;
+    border: 1px solid #eee;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.postCard-header {
+    border-bottom: 1px solid #eee;
+}
+.postCard-header .user {
+    text-decoration: none;
+    color: black;
+    height: 45px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.userProfilePic {
+    border-radius: 50%;
+    height: 80%;
+    max-width: 60px;
+    object-fit: contain;
+    margin-left: .5vw;
+}
+
+.userProfileName {
+    margin-left: .5vw;
+}
+
+img {
+    background-color: #fff;
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.postCard .info {
+    margin: 0;
+    min-height: 50px;
+    text-align: left;
+    padding: 4px;
+}
+.postCard .info .post-buttons{
+    height: 3vh;
+    min-height: 30px;
+}
+.postCard .info .post-buttons svg {
+    margin-left: .2vw;
+    height: 90%;
+    width: auto;
+}
+.postCard .info p {
+    margin: 0;
+}
+.bold {
+    font-weight: 600;
+}
+.red {
+    color: red;
+}

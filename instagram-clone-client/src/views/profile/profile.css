@@ -1,0 +1,12 @@
+.profile-info {
+    display: flex;
+}
+
+.profile-stat {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+.user-stat {
+    height: 50px;
+}

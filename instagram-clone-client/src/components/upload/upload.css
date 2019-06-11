@@ -1,0 +1,42 @@
+.uploadForm {
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.uploadForm input, textarea {
+    padding: 6px 12px;
+    border-radius: 5px;
+    margin: 5px;
+    border: 2px solid #eee;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.btn {
+    border: 2px solid #eee;
+    border-radius: 5px;
+    background-color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: 400;
+    font-size: 14px;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    padding: 6px 12px;
+}
+.btn-success {
+    background-color: #5cb85c;
+    color: #fff;
+}
+.center {
+    text-align: center;
+}
