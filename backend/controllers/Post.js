@@ -61,6 +61,37 @@ const Post = {
     },
 
     /**
+     * Get by user id
+     * @param {number} user_id
+     * @param {number} poster_user_id
+     */
+    getByUserId: async function(user_id, poster_user_id) {
+        let sql = `
+        SELECT p.*, u.username, COUNT(pl.post_id) AS likes, EXISTS(
+            SELECT user_id FROM post_like WHERE post_id = p.id AND user_id = ?
+            ) AS liked
+        FROM post AS p
+        INNER JOIN user AS u
+            ON u.id = p.user_id
+        LEFT JOIN post_like AS pl
+            ON pl.post_id = p.id
+        WHERE p.user_id = ?
+        GROUP BY p.id
+        ORDER BY p.added DESC
+        `;
+
+        return new Promise(async function (resolve, reject) {
+            try {
+                const [rows, fields] = await db.query(sql, [user_id, poster_user_id]);
+                resolve(rows, fields);
+            } catch (error) {
+                console.log(error);
+                reject(error);
+            }
+        });
+    },
+
+    /**
      * Save a new post
      * @param {object} data 
      */

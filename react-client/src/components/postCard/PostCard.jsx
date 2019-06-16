@@ -27,10 +27,11 @@ export default class PostCard extends Component {
                 redirect: "follow",
                 headers: headers
             })
-            .then(res => res.blob())
+            .then(res => {
+                return res.blob();
+            })
             .then(
             (blob) => {
-                console.log(blob);
                 this.setState({
                     error: null,
                     isLoaded: true,

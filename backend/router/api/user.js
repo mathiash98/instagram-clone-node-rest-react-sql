@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../../controllers/User');
+const Post = require('../../controllers/Post');
 
 const auth = require('../utilities/authMiddleware');
 
@@ -31,12 +32,14 @@ router.post('/', auth.isAdmin, function (req, res) {
 });
 
 router.get('/:id', function (req, res) {
-    User.getById(req.params.id)
-    .then(function (result, field) {
-        console.log(result, field);
-        res.json(result);
+    Promise.all([User.getById(req.params.id), Post.getByUserId((req.user ? req.user.id : 0), req.params.id)])
+    .then((values) => {
+        let out = values[0];
+        out.posts = values[1];
+
+        res.json(out);
     })
-    .catch(function (err) {
+    .catch((err) => {
         res.status(500).send(err);
     });
 });

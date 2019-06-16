@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-
 import { Redirect } from 'react-router-dom';
+
+import Auth from '../../utils/AuthHelper';
 
 import loading from '../../images/loading_pacman.gif';
 import './login.css';
+
+const auth = new Auth();
 
 export default class Login extends Component {
     constructor(props) {
@@ -44,46 +47,23 @@ export default class Login extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.setState({loading: true});
-        const data = {
-            username: this.state.username,
-            password: this.state.password
-        };
-        fetch('http://localhost:8888/auth/local-login', {
-            method: 'POST',
-            mode: 'cors',
-            redirect: 'follow',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(res => {
-            console.log(res);
-            if (res.ok) {
-                res.text()
-                .then( token => {
-                    console.log(token);
-                    // Do something with token
-                    localStorage.setItem('jwt', token);
-                    this.setState({
-                        loading: false,
-                        token: token,
-                        toDashboard: true
-                    });
 
-                });
-            } else {
-                res.text()
-                .then(text => {
-                    console.log(text);
-                    this.setState({
-                        error: text,
-                        loading: false
-                    });
-                })
-            }
+        auth.login(this.state.username, this.state.password)
+        .then(token => {
+            console.log(token);
+            this.setState({
+                loading: false,
+                error: false,
+                toDashboard: true
+            });
         })
-        
+        .catch(err => {
+            console.log(err);
+            this.setState({
+                loading: false,
+                error: err
+            });
+        });
     }
     
     handleChange = (e) => {

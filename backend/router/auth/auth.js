@@ -23,6 +23,7 @@ async function jwtSign(user) {
 }
 
 router.post('/local-login', function (req, res) {
+    console.log(req.body);
     passport.authenticate('local-login', {session: false}, async function (err, user) {
         if (err || !user) {
             if (err && err.message) {

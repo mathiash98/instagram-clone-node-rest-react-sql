@@ -26,7 +26,21 @@ const User = {
     getById: function (id) {
         return new Promise(async function(resolve, reject) {
             try {
-                const [rows, fields] = await db.query('SELECT id, username, added FROM `user` WHERE `id` = ?', [id]);
+                const sql = `
+                    SELECT u.id, u.username, u.added,
+                        COUNT(DISTINCT ufollowing.user_id) AS following_num,
+                        COUNT(DISTINCT ufollowers.follow_id) AS followers_num,
+                        COUNT(DISTINCT p.id) AS posts_num
+                    FROM user AS u
+                    LEFT JOIN user_follow AS ufollowing
+                        ON ufollowing.user_id = u.id
+                    LEFT JOIN user_follow AS ufollowers
+                        ON ufollowers.follow_id = u.id
+                    LEFT JOIN post AS p
+                        on p.user_id = u.id
+                    WHERE u.id = ?
+                `;
+                const [rows, fields] = await db.query(sql, [id]);
                 resolve(rows[0], fields[0]);
             } catch (error) {
                 reject(error);

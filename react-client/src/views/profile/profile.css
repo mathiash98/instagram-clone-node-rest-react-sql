@@ -1,0 +1,43 @@
+.profile {
+    width: 100%;
+    max-width: 935px;
+    margin: auto;
+}
+
+.profile-info {
+    display: flex;
+}
+
+.profile-info .profile-pic {
+    border-radius: 50%;
+    max-height: 100%;
+    object-fit: contain;
+    margin-left: 5vw;
+    margin-right: 10vw;
+}
+
+.profile-info-follow {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.profile-info-follow .follow {
+    margin: auto;
+}
+
+.profile-stat {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+.user-stat {
+    height: 50px;
+}
+
+.post-grid {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 3rem;
+}
